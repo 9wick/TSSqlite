@@ -21,6 +21,7 @@
 +(id)sharedSqliteCore;
 +(NSString *)stringByEscapeWithString:(NSString*)string;
 
+- (BOOL)addSkipBackupAttributeToItem;
 -(BOOL)open;
 -(int)version;
 -(BOOL)needMigrate;
@@ -28,6 +29,7 @@
 -(void)migrateToVersion:(int)version;
 -(id)initWithFileName:(NSString *)fileName;
 -(int)lastInsertedId;
+
 
 -(NSArray *)executeWithSql:(NSString *)sql;
 -(NSArray *)executeWithSql:(NSString *)sql forClass:(Class)class_ ;
