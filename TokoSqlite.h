@@ -8,6 +8,7 @@
 
 #import "TokoColumnSchema.h"
 #import "TokoDatabaseSchema.h"
+#import "TokoTableSchema.h"
 #import "TokoModel.h"
 #import "TokoModelTable.h"
 #import "TokoQuery.h"
