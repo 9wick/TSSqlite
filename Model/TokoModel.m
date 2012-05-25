@@ -185,7 +185,7 @@
     TokoColumnSchema *col = [_schema schemaWithColumnName:key];
     Class class = [col classType];
     if(![value isKindOfClass: class ]){
-        NSLog(@"Error");
+        NSLog(@"TokoModel class different Error");
     }
     [_originalData setValue:value forKey:key];
 }
