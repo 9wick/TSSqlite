@@ -23,6 +23,7 @@
 }
 
 -(void)dealloc{
+    TokoRelease(_sectionKey);
     TokoRelease(_query);
     TokoRelease(_cachedData);
     TokoRelease(_sectionName);
