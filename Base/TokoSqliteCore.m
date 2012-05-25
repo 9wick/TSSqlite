@@ -203,15 +203,25 @@ TokoSqliteCore *__sharedSqliteCore = nil;
                     if([row isKindOfClass:[TokoModel class]]){
                         id value = nil;
                         TokoColmunType type = [[[(TokoModel *)row schema] schemaWithColumnName:name] type];
-                        if(TokoColmunTypeInteger == type){
-                            value = [NSNumber numberWithInt:sqlite3_column_int(statement, i)];
-                        }else if(TokoColmunTypeReal == type){
-                            value = [NSNumber numberWithDouble:sqlite3_column_double(statement, i)];
-                        }else if(TokoColmunTypeBlob == type){
+                        
+                        
+                        if(TokoColmunTypeBlob == type){
                             value = [NSData dataWithBytes:sqlite3_column_blob(statement, i) length:sqlite3_column_bytes(statement, i)];
-                        }else if(TokoColmunTypeText == type){
-                            value = [[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, i) encoding:NSUTF8StringEncoding] autorelease];
+                        }else{
+                            int sqliteType = sqlite3_column_type(statement, i);
+                            
+                            if(SQLITE_NULL != sqliteType){
+                                NSString *str = [[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, i) encoding:NSUTF8StringEncoding] autorelease];
+                                if(TokoColmunTypeInteger == type){
+                                    value = [NSNumber numberWithInt:[str intValue]];
+                                }else if(TokoColmunTypeReal == type){
+                                    value = [NSNumber numberWithDouble:[str doubleValue]];
+                                }else if(TokoColmunTypeText == type){
+                                    value = str;
+                                }
+                            }
                         }
+                        
                         if(value){
                             [row setOriginalValue:value forKey:name];
                         }
