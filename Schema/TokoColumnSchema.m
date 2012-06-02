@@ -7,7 +7,7 @@
 //
 
 #import "TokoColumnSchema.h"
-#import "TokoSqliteCore.h"
+#import "TokoSqlite.h"
 
 @interface TokoColumnSchema ()
 +(TokoColmunType)colmunTypeFromString:(NSString *)string;

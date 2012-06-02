@@ -7,9 +7,7 @@
 //
 
 #import "TokoModel.h"
-#import "TokoSqliteCore.h"
-#import "TokoTableSchema.h"
-#import "TokoColumnSchema.h"
+#import "TokoSqlite.h"
 
 @interface TokoModel()
 -(void)updateSave;

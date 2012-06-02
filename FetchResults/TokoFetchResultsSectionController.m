@@ -7,7 +7,7 @@
 //
 
 #import "TokoFetchResultsSectionController.h"
-#import "TokoQuery.h"
+#import "TokoSqlite.h"
 
 @implementation TokoFetchResultsSectionController
 @synthesize sectionName = _sectionName;

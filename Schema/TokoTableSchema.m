@@ -7,8 +7,7 @@
 //
 
 #import "TokoTableSchema.h"
-#import "TokoColumnSchema.h"
-#import "TokoSqliteCore.h"
+#import "TokoSqlite.h"
 #import <objc/runtime.h>
 
 void setPropertyMethod(id self, SEL _cmd, id object);

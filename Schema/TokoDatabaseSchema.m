@@ -7,8 +7,7 @@
 //
 
 #import "TokoDatabaseSchema.h"
-#import "TokoSqliteCore.h"
-#import "TokoTableSchema.h"
+#import "TokoSqlite.h"
 
 @interface TokoDatabaseSchema()
 -(void)analyzeSchemaData:(NSDictionary *)data;

@@ -7,9 +7,7 @@
 //
 
 #import "TokoSqliteCore.h"
-#import "TokoModel.h"
-#import "TokoColumnSchema.h"
-#import "TokoTableSchema.h"
+#import "TokoSqlite.h"
 #include <sys/xattr.h>
 
 

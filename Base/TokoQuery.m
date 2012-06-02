@@ -7,9 +7,7 @@
 //
 
 #import "TokoQuery.h"
-#import "TokoDatabaseSchema.h"
-#import "TokoTableSchema.h"
-
+#import "TokoSqlite.h"
 
 @implementation TokoQuery
 @synthesize alias = _alias;
