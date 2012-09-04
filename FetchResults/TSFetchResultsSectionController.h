@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class TokoQuery;
-@interface TokoFetchResultsSectionController : NSObject{
-    TokoQuery *_query;
+@class TSQuery;
+@interface TSFetchResultsSectionController : NSObject{
+    TSQuery *_query;
     NSMutableDictionary *_cachedData;
     int _limit;
     NSString *_sectionName;
@@ -21,7 +21,7 @@
 @property (retain,nonatomic) id sectionKey;
 
 -(int)count;
--(id)initWithQuery:(TokoQuery *)query;
+-(id)initWithQuery:(TSQuery *)query;
 -(id)objectAtIndex:(int)index;
 -(void)removeAllObjects;
 @end

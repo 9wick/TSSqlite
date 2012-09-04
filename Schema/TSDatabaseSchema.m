@@ -6,17 +6,17 @@
 //  Copyright (c) 2012 tokotoko soft. All rights reserved.
 //
 
-#import "TokoDatabaseSchema.h"
+#import "TSDatabaseSchema.h"
 #import "TokoSqlite.h"
 
-@interface TokoDatabaseSchema()
+@interface TSDatabaseSchema()
 -(void)analyzeSchemaData:(NSDictionary *)data;
 
 @end
 
 
 
-@implementation TokoDatabaseSchema
+@implementation TSDatabaseSchema
 @synthesize tableSchemas = _schema;
 
 -(id)initWithSchemaData:(NSDictionary *)schemaData{
@@ -102,7 +102,7 @@
 
 #pragma mark - migrate
 
--(void)migrateOnDb:(TokoSqliteCore *)sqliteCore from:(TokoDatabaseSchema *)oldSchema{
+-(void)migrateOnDb:(TSSqlite *)sqliteCore from:(TSDatabaseSchema *)oldSchema{
     
     for (TokoTableSchema *table in _schema) {
         [table migrateOnDb:sqliteCore from:[oldSchema schemaWithTableName:table.name]];

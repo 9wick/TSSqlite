@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
-#import "TokoDatabaseSchema.h"
+#import "TSDatabaseSchema.h"
 
-@interface TokoSqliteCore : NSObject {
+@interface TSSqlite : NSObject {
 	sqlite3 *_database;
-    TokoDatabaseSchema *_schema;
+    TSDatabaseSchema *_schema;
     NSDictionary *_settingData;
 }
 
-@property(retain, nonatomic) TokoDatabaseSchema *schema;
+@property(retain, nonatomic) TSDatabaseSchema *schema;
 
-+(id)sharedSqliteCore;
++(id)sharedSqlite;
 +(NSString *)stringByEscapeWithString:(NSString*)string;
 
 - (BOOL)addSkipBackupAttributeToItem;

@@ -7,18 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-@class TokoQuery;
-@class TokoFetchResultsSectionController;
+@class TSQuery;
+@class TSFetchResultsSectionController;
 
-@interface TokoFetchResultsController : NSObject{
+@interface TSFetchResultsController : NSObject{
     NSMutableArray *_sections;
     NSString *_sectionKey,*_sectionNameKey;
-    TokoQuery *_query;
+    TSQuery *_query;
 }
 
 -(int)sectionCount;
--(id)initWithQuery:(TokoQuery *)query sectionKey:(NSString *)key sectionNameKey:(NSString *)nameKey;
--(TokoFetchResultsSectionController *)sectionAtIndex:(int)index;
+-(id)initWithQuery:(TSQuery *)query sectionKey:(NSString *)key sectionNameKey:(NSString *)nameKey;
+-(TSFetchResultsSectionController *)sectionAtIndex:(int)index;
 -(void)preFetch;
 -(id)objectAtIndexPath:(NSIndexPath *)indexPath;
 -(NSString *)sectionNameAtIndex:(int)index;
@@ -27,6 +27,6 @@
 -(BOOL)isExistAtIndexPath:(NSIndexPath *)indexPath;
 
 
--(int)sectionIndexForSection:(TokoFetchResultsSectionController *)section;
--(TokoFetchResultsSectionController *)sectionForKey:(id)key;
+-(int)sectionIndexForSection:(TSFetchResultsSectionController *)section;
+-(TSFetchResultsSectionController *)sectionForKey:(id)key;
 @end

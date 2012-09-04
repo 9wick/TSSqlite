@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 tokotoko soft. All rights reserved.
 //
 
-#import "TokoQuery.h"
+#import "TSQuery.h"
 #import "TokoSqlite.h"
 
-@implementation TokoQuery
+@implementation TSQuery
 @synthesize alias = _alias;
 @synthesize tableName = _tableName;
 @synthesize sqliteCore = _sqliteCore;
@@ -43,7 +43,7 @@
 }
 
 - (id)copy{
-    TokoQuery* result = [[[self class] alloc] init];
+    TSQuery* result = [[[self class] alloc] init];
     
     if (result){
         result.alias = [[_alias mutableCopy] autorelease];
@@ -160,7 +160,7 @@
 
 
 -(id)fetchOne{
-    TokoQuery *query = [self copy];
+    TSQuery *query = [self copy];
     query.limit = 1;
     id obj = [[query fetchAll] lastObject];
     [query release];
@@ -170,7 +170,7 @@
 
          
 -(int)count{
-    TokoQuery *query = [self copy];
+    TSQuery *query = [self copy];
     [query resetSelectKey];
     [query addSelectKey:@"count(1)" as:@"count"];
     NSArray *array = [_sqliteCore executeWithSql:[query sql] ];

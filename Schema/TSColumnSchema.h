@@ -8,19 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-enum TokoColmunType {
-    TokoColmunTypeText    = 1,
-    TokoColmunTypeInteger = 2,
-    TokoColmunTypeReal    = 3,
-    TokoColmunTypeBlob    = 4,
+enum TSColmunType {
+    TSColmunTypeText    = 1,
+    TSColmunTypeInteger = 2,
+    TSColmunTypeReal    = 3,
+    TSColmunTypeBlob    = 4,
 };
 
-typedef enum  TokoColmunType TokoColmunType;
+typedef enum  TSColmunType TSColmunType;
 
 
-@interface TokoColumnSchema : NSObject{
+@interface TSColumnSchema : NSObject{
     NSString *_name;
-    TokoColmunType _type;
+    TSColmunType _type;
     BOOL _isKey;
     BOOL _isAutoIncrement;
     NSString* _defaultValue;
@@ -28,7 +28,7 @@ typedef enum  TokoColmunType TokoColmunType;
 }
 
 @property(readonly,nonatomic) NSString *name;
-@property(readonly,nonatomic) TokoColmunType type;
+@property(readonly,nonatomic) TSColmunType type;
 @property(readonly,nonatomic) BOOL isKey; 
 @property(readonly,nonatomic) BOOL isAutoincrement;
 @property(readonly,nonatomic) NSString *defaultValue;

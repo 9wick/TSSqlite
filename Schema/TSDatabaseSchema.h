@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class TokoSqliteCore;
+@class TSSqlite;
 @class TokoTableSchema;
-@interface TokoDatabaseSchema : NSObject{
+@interface TSDatabaseSchema : NSObject{
     NSMutableArray *_schema;
 }
 
@@ -24,5 +24,5 @@
 -(TokoTableSchema *)schemaWithClassName:(NSString *)className;
 -(TokoTableSchema *)schemaWithTableName:(NSString *)tableName;
 
--(void)migrateOnDb:(TokoSqliteCore *)sqliteCore from:(TokoDatabaseSchema *)schema;
+-(void)migrateOnDb:(TSSqlite *)sqliteCore from:(TSDatabaseSchema *)schema;
 @end

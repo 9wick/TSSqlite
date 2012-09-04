@@ -6,19 +6,19 @@
 //  Copyright (c) 2012 tokotoko soft. All rights reserved.
 //
 
-#import "TokoColumnSchema.h"
+#import "TSColumnSchema.h"
 #import "TokoSqlite.h"
 
-@interface TokoColumnSchema ()
-+(TokoColmunType)colmunTypeFromString:(NSString *)string;
-+(NSString *)stringWithColmunType:(TokoColmunType)type;
+@interface TSColumnSchema ()
++(TSColmunType)colmunTypeFromString:(NSString *)string;
++(NSString *)stringWithColmunType:(TSColmunType)type;
 
 @end
 
 
 
 
-@implementation TokoColumnSchema
+@implementation TSColumnSchema
 
 @synthesize name = _name;
 @synthesize type = _type;
@@ -27,32 +27,32 @@
 @synthesize isAutoincrement = _isAutoIncrement;
 
 
-+(TokoColmunType)colmunTypeFromString:(NSString *)string{
++(TSColmunType)colmunTypeFromString:(NSString *)string{
     if([string isEqualToString:@"int"]
        || [string isEqualToString:@"integer"]){
-        return TokoColmunTypeInteger;
+        return TSColmunTypeInteger;
         
     }else if([string isEqualToString:@"float"]
              || [string isEqualToString:@"double"]
              || [string isEqualToString:@"real"]){
-        return TokoColmunTypeReal;
+        return TSColmunTypeReal;
         
     }else if([string isEqualToString:@"blob"]){
-        return TokoColmunTypeBlob;
+        return TSColmunTypeBlob;
         
     }
-    return TokoColmunTypeText;
+    return TSColmunTypeText;
 }
 
-+(NSString *)stringWithColmunType:(TokoColmunType)type{
++(NSString *)stringWithColmunType:(TSColmunType)type{
     switch (type) {
-        case TokoColmunTypeInteger:
+        case TSColmunTypeInteger:
             return @"integer";
             break;
-        case TokoColmunTypeReal:
+        case TSColmunTypeReal:
             return @"real";
             break;
-        case TokoColmunTypeBlob:
+        case TSColmunTypeBlob:
             return @"blob";
             break;
         default:
@@ -85,10 +85,10 @@
 -(NSString *)escapedString:(id)value{
     NSString *escapedValue = nil;
     
-    if(self.type == TokoColmunTypeInteger){
+    if(self.type == TSColmunTypeInteger){
         escapedValue = [NSString stringWithFormat:@"%d", [value intValue]];
-    }else if(self.type == TokoColmunTypeText){
-        escapedValue = [NSString stringWithFormat:@"'%@'", [TokoSqliteCore stringByEscapeWithString:value] ];
+    }else if(self.type == TSColmunTypeText){
+        escapedValue = [NSString stringWithFormat:@"'%@'", [TSSqlite stringByEscapeWithString:value] ];
     }else{
         escapedValue = @"''";
     }
@@ -120,14 +120,14 @@
 
 -(Class)classType{
     switch (_type) {
-        case TokoColmunTypeText:
+        case TSColmunTypeText:
             return [NSString class];
             break;
-        case TokoColmunTypeInteger:
-        case TokoColmunTypeReal:
+        case TSColmunTypeInteger:
+        case TSColmunTypeReal:
             return [NSNumber class];
             break;
-        case TokoColmunTypeBlob:
+        case TSColmunTypeBlob:
             return [NSData class];
             break;
             

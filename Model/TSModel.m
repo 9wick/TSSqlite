@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 tokotoko soft. All rights reserved.
 //
 
-#import "TokoModel.h"
+#import "TSModel.h"
 #import "TokoSqlite.h"
 
-@interface TokoModel()
+@interface TSModel()
 -(void)updateSave;
 -(void)insertSave;
 @end
 
-@implementation TokoModel
+@implementation TSModel
 @synthesize sqliteCore = _sqliteCore;
 @dynamic name;
 @synthesize schema = _schema;
@@ -23,7 +23,7 @@
     if((self = [super init])){
         _data = [[NSMutableDictionary alloc] init];
         _originalData = [[NSMutableDictionary alloc] init];
-        _sqliteCore = [[TokoSqliteCore sharedSqliteCore] retain];
+        _sqliteCore = [[TSSqlite sharedSqliteCore] retain];
         _schema = [[[_sqliteCore schema] schemaWithClassName:NSStringFromClass([self class])] retain];
     }
     return self;
@@ -53,7 +53,7 @@
     
     NSMutableArray *keys = [[NSMutableArray alloc] init];
     NSMutableArray *values = [[NSMutableArray alloc] init];
-    for (TokoColumnSchema *column in _schema.columns) {
+    for (TSColumnSchema *column in _schema.columns) {
         id obj = [_data objectForKey:column.name];
         if(obj == nil){
             continue;
@@ -80,7 +80,7 @@
    
     NSMutableArray *keys = [[NSMutableArray alloc] init];
     NSMutableArray *values = [[NSMutableArray alloc] init];
-    for (TokoColumnSchema *column in _schema.columns) {
+    for (TSColumnSchema *column in _schema.columns) {
         id obj = [_data objectForKey:column.name];
         if(obj == nil){
             continue;
@@ -90,7 +90,7 @@
         
     }
     if([keys count] == 0){
-        TokoColumnSchema *column  = [_schema.primaryKeys lastObject];
+        TSColumnSchema *column  = [_schema.primaryKeys lastObject];
         [keys addObject:[NSString stringWithFormat:@"`%@`",column.name]];
         [values addObject:[NSNull null]];
         
@@ -119,7 +119,7 @@
     [_data removeAllObjects];
     
     if([_schema.primaryKeys count]){
-        TokoColumnSchema *colmun  = [_schema.primaryKeys lastObject];
+        TSColumnSchema *colmun  = [_schema.primaryKeys lastObject];
         if (colmun.isAutoincrement) {
             [_originalData setValue:[NSNumber numberWithInt:[_sqliteCore lastInsertedId]] forKey:colmun.name ];
         }
@@ -152,7 +152,7 @@
 
 -(NSString *)whereString{
     NSMutableArray *where = [[[NSMutableArray alloc] init] autorelease];
-    for (TokoColumnSchema *column in _schema.primaryKeys) {
+    for (TSColumnSchema *column in _schema.primaryKeys) {
         NSString *value = [column escapedString:[_originalData objectForKey: column.name]];
         [where addObject:[NSString stringWithFormat:@"`%@` = %@", column.name, value]];
     }    
@@ -164,7 +164,7 @@
     NSMutableString *description = [NSMutableString string];
     
     [description appendFormat:@"[%@] (db : %@){\n",NSStringFromClass([self class]), _schema.name];
-    for (TokoColumnSchema *colmun in _schema.columns) {
+    for (TSColumnSchema *colmun in _schema.columns) {
         id value = [_data objectForKey:colmun.name];
         if(value == nil){
             value = [_originalData objectForKey:colmun.name];
@@ -180,7 +180,7 @@
     if(!value || !key){
         return;
     }
-    TokoColumnSchema *col = [_schema schemaWithColumnName:key];
+    TSColumnSchema *col = [_schema schemaWithColumnName:key];
     Class class = [col classType];
     if(![value isKindOfClass: class ]){
         NSLog(@"TokoModel class different Error");

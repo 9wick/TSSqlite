@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TokoSqliteCore.h"
+#import "TSSqlite.h"
 
-@interface TokoQuery : NSObject{
+@interface TSQuery : NSObject{
     NSString *_alias;
     NSString *_tableName;
     NSMutableArray *_wheres;
     NSMutableArray *_orders;
     NSMutableArray *_selects;
     NSMutableArray *_groups;
-    TokoSqliteCore *_sqliteCore;
+    TSSqlite *_sqliteCore;
     
     int _limit,_offset;
     
@@ -24,7 +24,7 @@
 
 @property(retain,nonatomic) NSString *alias;
 @property(retain,nonatomic) NSString *tableName;
-@property(retain,nonatomic) TokoSqliteCore  *sqliteCore;
+@property(retain,nonatomic) TSSqlite  *sqliteCore;
 @property(assign,nonatomic) int limit;
 @property(assign,nonatomic) int offset;
 

@@ -7,22 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-@class TokoSqliteCore;
-@class TokoTableSchema;
+@class TSSqlite;
+@class TSTableSchema;
 
 
-@interface TokoModel : NSObject{
-    TokoSqliteCore *_sqliteCore;
-    TokoTableSchema *_schema;
+@interface TSModel : NSObject{
+    TSSqlite *_sqliteCore;
+    TSTableSchema *_schema;
     NSMutableDictionary *_data;
     NSMutableDictionary *_originalData;
     
 }
 
 
-@property(retain,nonatomic) TokoSqliteCore *sqliteCore;
+@property(retain,nonatomic) TSSqlite *sqliteCore;
 @property(retain,nonatomic) NSString *name;
-@property(readonly,nonatomic) TokoTableSchema *schema;
+@property(readonly,nonatomic) TSTableSchema *schema;
 
 -(void)save;
 -(void)updateSave;

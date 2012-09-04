@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 tokotoko soft. All rights reserved.
 //
 
-#import "TokoModelTable.h"
+#import "TSModelTable.h"
 
 
-@implementation TokoModelTable
+@implementation TSModelTable
 
 +(id)table{
     return [[[self alloc] init] autorelease];
@@ -19,10 +19,10 @@
     abort();
 }
 
--(TokoQuery *)query{
-    TokoQuery *query = [[[TokoQuery alloc] init] autorelease];
+-(TSQuery *)query{
+    TSQuery *query = [[[TSQuery alloc] init] autorelease];
     query.tableName = [self tableName];
-    query.sqliteCore = [TokoSqliteCore sharedSqliteCore];
+    query.sqliteCore = [TSSqlite sharedSqliteCore];
     return query;
 }
 

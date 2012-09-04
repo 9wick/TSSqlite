@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 tokotoko soft. All rights reserved.
 //
 
-#import "TokoFetchResultsSectionController.h"
+#import "TSFetchResultsSectionController.h"
 #import "TokoSqlite.h"
 
-@implementation TokoFetchResultsSectionController
+@implementation TSFetchResultsSectionController
 @synthesize sectionName = _sectionName;
 @synthesize sectionKey = _sectionKey;
 
--(id)initWithQuery:(TokoQuery *)query{
+-(id)initWithQuery:(TSQuery *)query{
     if((self =[super init] )){
         _query = [query retain];
         _cachedData = [[NSMutableDictionary alloc] init];

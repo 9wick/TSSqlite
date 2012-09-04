@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 tokotoko soft. All rights reserved.
 //
 
-#import "TokoFetchResultsController.h"
+#import "TSFetchResultsController.h"
 #import "TokoSqlite.h"
 
-@implementation TokoFetchResultsController
+@implementation TSFetchResultsController
 
--(id)initWithQuery:(TokoQuery *)query sectionKey:(NSString *)key sectionNameKey:(NSString *)nameKey{
+-(id)initWithQuery:(TSQuery *)query sectionKey:(NSString *)key sectionNameKey:(NSString *)nameKey{
     if((self = [super init])){
         _query = [query retain];
         _sectionKey = [key retain];
@@ -32,7 +32,7 @@
 
 -(void)preFetch{
     [_sections removeAllObjects];
-    TokoQuery *query = [_query copy];
+    TSQuery *query = [_query copy];
     [query addGroupBy:_sectionKey];
     [query resetSelectKey];
     [query addSelectKey:_sectionKey as:_sectionKey];
@@ -43,7 +43,7 @@
     [query release];
     
     for (NSDictionary *dic in sectionData) {
-        TokoQuery *query = [_query copy];
+        TSQuery *query = [_query copy];
         [query addWhereWithKey:_sectionKey value:[dic objectForKey:_sectionKey]];
         TokoFetchResultsSectionController *sectionController = [[TokoFetchResultsSectionController alloc] initWithQuery:query];
         sectionController.sectionName = [dic objectForKey:_sectionNameKey];

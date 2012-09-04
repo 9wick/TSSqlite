@@ -6,23 +6,23 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "TokoSqliteCore.h"
+#import "TSSqlite.h"
 #import "TokoSqlite.h"
 #include <sys/xattr.h>
 
 
 
-TokoSqliteCore *__sharedSqliteCore = nil;
+TSSqlite *__sharedSqlite = nil;
 
-@implementation TokoSqliteCore
+@implementation TSSqlite
 
 @synthesize schema = _schema;
 
-+(id)sharedSqliteCore{
-    if(__sharedSqliteCore == nil){
-        __sharedSqliteCore = [[TokoSqliteCore alloc] init];
++(id)sharedSqlite{
+    if(__sharedSqlite == nil){
+        __sharedSqlite = [[TSSqlite alloc] init];
     }
-    return __sharedSqliteCore;
+    return __sharedSqlite;
 }
 
 -(id)init{
@@ -46,7 +46,7 @@ TokoSqliteCore *__sharedSqliteCore = nil;
         
         NSString *schemaFileName = [[_settingData objectForKey:@"schema"] lastObject];
         if(schemaFileName){
-            TokoDatabaseSchema *schema = [[TokoDatabaseSchema alloc] initWithSchemaJson:schemaFileName];
+            TSDatabaseSchema *schema = [[TSDatabaseSchema alloc] initWithSchemaJson:schemaFileName];
             [self setSchema:schema];
             [schema addMethodToAllTable];
             [schema release];
@@ -200,7 +200,7 @@ TokoSqliteCore *__sharedSqliteCore = nil;
                     NSString *name = [[NSString alloc] initWithCString:sqlite3_column_name(statement, i) encoding:NSUTF8StringEncoding];
                     if([row isKindOfClass:[TokoModel class]]){
                         id value = nil;
-                        TokoColmunType type = [[[(TokoModel *)row schema] schemaWithColumnName:name] type];
+                        TokoColmunType type = [[[(TSModel *)row schema] schemaWithColumnName:name] type];
                         
                         
                         if(TokoColmunTypeBlob == type){
@@ -325,13 +325,13 @@ TokoSqliteCore *__sharedSqliteCore = nil;
         
         [self executeWithSql:@"BEGIN TRANSACTION"];
         
-        TokoDatabaseSchema *oldSchema = nil;
+        TSDatabaseSchema *oldSchema = nil;
         if(i != 0){
             NSString *oldSchemaFileName = [[_settingData objectForKey:@"schema"] objectAtIndex:i-1];
-            oldSchema = [[TokoDatabaseSchema alloc] initWithSchemaJson:oldSchemaFileName];
+            oldSchema = [[TSDatabaseSchema alloc] initWithSchemaJson:oldSchemaFileName];
         }
         NSString *newSchemaFileName = [[_settingData objectForKey:@"schema"] objectAtIndex:i];
-        TokoDatabaseSchema *newSchema = [[TokoDatabaseSchema alloc] initWithSchemaJson:newSchemaFileName];
+        TSDatabaseSchema *newSchema = [[TSDatabaseSchema alloc] initWithSchemaJson:newSchemaFileName];
         [newSchema migrateOnDb:self from:oldSchema];
         [newSchema release];
         [oldSchema release];

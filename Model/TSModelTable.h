@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TokoQuery.h"
+#import "TSQuery.h"
 
-@interface TokoModelTable : NSObject
+@interface TSModelTable : NSObject
 
 +(id)table;
 -(NSString *)tableName;
--(TokoQuery *)query;
+-(TSQuery *)query;
 
 @end
