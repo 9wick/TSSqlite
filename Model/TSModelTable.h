@@ -1,9 +1,10 @@
 //
-//  TokoModelTable.h
-//  TokoSqliteLib
+//  TSModelTable.h
+//  TSSqlite
 //
-//  Created by 木戸 康平 on 12/02/16.
-//  Copyright (c) 2012 tokotoko soft. All rights reserved.
+//  Created by Kouhei Kido on 12/09/5.
+//  Copyright 2012 Kouhei Kido.
+//  MIT License http://www.opensource.org/licenses/mit-license.php
 //
 
 #import <Foundation/Foundation.h>

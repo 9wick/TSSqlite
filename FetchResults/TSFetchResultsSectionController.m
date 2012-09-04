@@ -1,9 +1,10 @@
 //
-//  TokoFetchResultsController.m
-//  toko
+//  TSFetchResultsController.m
+//  TSSqlite
 //
-//  Created by 木戸 康平 on 12/04/07.
-//  Copyright (c) 2012 tokotoko soft. All rights reserved.
+//  Created by Kouhei Kido on 12/09/5.
+//  Copyright 2012 Kouhei Kido.
+//  MIT License http://www.opensource.org/licenses/mit-license.php
 //
 
 #import "TSFetchResultsSectionController.h"

@@ -1,10 +1,12 @@
 //
-//  KKSqlite.m
-//  KKFrameworks
+//  TSSqlite.m
+//  TSSqlite
 //
-//  Created by wicket on 11/08/22.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Kouhei Kido on 12/09/5.
+//  Copyright 2012 Kouhei Kido.
+//  MIT License http://www.opensource.org/licenses/mit-license.php
 //
+
 
 #import "TSSqlite.h"
 #include <sys/xattr.h>
