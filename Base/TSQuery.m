@@ -7,7 +7,7 @@
 //
 
 #import "TSQuery.h"
-#import "TokoSqlite.h"
+#import "TSSqlite.h"
 
 @implementation TSQuery
 @synthesize alias = _alias;
@@ -32,13 +32,13 @@
     return  self;
 }
 -(void)dealloc{
-    TokoRelease(_alias);
-    TokoRelease(_selects);
-    TokoRelease(_groups);
-    TokoRelease(_orders);
-    TokoRelease(_tableName);
-    TokoRelease(_sqliteCore);
-    TokoRelease(_wheres);
+    TSRelease(_alias);
+    TSRelease(_selects);
+    TSRelease(_groups);
+    TSRelease(_orders);
+    TSRelease(_tableName);
+    TSRelease(_sqliteCore);
+    TSRelease(_wheres);
     [super dealloc];
 }
 
@@ -148,7 +148,7 @@
 }
 
 -(NSArray *)fetchAll{
-    TokoTableSchema * schema = [[_sqliteCore schema] schemaWithTableName:_tableName];
+    TSTableSchema * schema = [[_sqliteCore schema] schemaWithTableName:_tableName];
     return [_sqliteCore executeWithSql:[self sql] forClass:NSClassFromString(schema.className) ];
 }
 

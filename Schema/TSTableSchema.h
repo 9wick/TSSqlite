@@ -1,5 +1,5 @@
 //
-//  TokoTableSchema.h
+//  TSTableSchema.h
 //  TokoSqliteLib
 //
 //  Created by 木戸 康平 on 12/02/13.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class TokoColumnSchema;
-@class TokoSqliteCore;
-@interface TokoTableSchema : NSObject{
+@class TSColumnSchema;
+@class TSSqlite;
+@interface TSTableSchema : NSObject{
     NSString *_name;
     NSString *_className;
     NSMutableArray *_primaryKeys;
@@ -26,9 +26,9 @@
 
 -(id)initWithName:(NSString *)name data:(NSDictionary *)data;
 
--(void)createTableOnDb:(TokoSqliteCore *)sqliteCore;
--(void)createIndexOnDb:(TokoSqliteCore *)sqliteCore;
+-(void)createTableOnDb:(TSSqlite *)sqliteCore;
+-(void)createIndexOnDb:(TSSqlite *)sqliteCore;
 -(void)addMethodToClass;
--(TokoColumnSchema *)schemaWithColumnName:(NSString *)columnName;
--(void)migrateOnDb:(TokoSqliteCore *)sqliteCore from:(TokoTableSchema *)schema;
+-(TSColumnSchema *)schemaWithColumnName:(NSString *)columnName;
+-(void)migrateOnDb:(TSSqlite *)sqliteCore from:(TSTableSchema *)schema;
 @end

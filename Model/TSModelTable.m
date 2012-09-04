@@ -7,7 +7,7 @@
 //
 
 #import "TSModelTable.h"
-
+#import "TSQuery.h"
 
 @implementation TSModelTable
 
@@ -22,7 +22,7 @@
 -(TSQuery *)query{
     TSQuery *query = [[[TSQuery alloc] init] autorelease];
     query.tableName = [self tableName];
-    query.sqliteCore = [TSSqlite sharedSqliteCore];
+    query.sqliteCore = [TSSqlite sharedSqlite];
     return query;
 }
 

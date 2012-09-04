@@ -7,7 +7,7 @@
 //
 
 #import "TSDatabaseSchema.h"
-#import "TokoSqlite.h"
+#import "TSSqlite.h"
 
 @interface TSDatabaseSchema()
 -(void)analyzeSchemaData:(NSDictionary *)data;
@@ -50,7 +50,7 @@
 }
 
 -(void)dealloc{
-    TokoRelease(_schema);
+    TSRelease(_schema);
     [super dealloc];
 }
 
@@ -62,15 +62,15 @@
 
 -(void)analyzeSchemaData:(NSDictionary *)data{
     for (NSString *tableName in data) {
-        TokoTableSchema *table = [[TokoTableSchema alloc] initWithName:tableName data:[data objectForKey:tableName]];
+        TSTableSchema *table = [[TSTableSchema alloc] initWithName:tableName data:[data objectForKey:tableName]];
         [_schema addObject:table];
         [table release];
     }
 
 }
 
--(TokoTableSchema *)schemaWithClassName:(NSString *)className{
-    for (TokoTableSchema *tableSchema in _schema) {
+-(TSTableSchema *)schemaWithClassName:(NSString *)className{
+    for (TSTableSchema *tableSchema in _schema) {
         if([tableSchema.className isEqualToString:className]){
             return tableSchema;
         }
@@ -79,8 +79,8 @@
 }
 
 
--(TokoTableSchema *)schemaWithTableName:(NSString *)tableName{
-    for (TokoTableSchema *tableSchema in _schema) {
+-(TSTableSchema *)schemaWithTableName:(NSString *)tableName{
+    for (TSTableSchema *tableSchema in _schema) {
         if([tableSchema.name isEqualToString:tableName]){
             return tableSchema;
         }
@@ -93,7 +93,7 @@
 #pragma mark - dynamic method
 
 -(void)addMethodToAllTable{
-    for (TokoTableSchema *table in _schema) {
+    for (TSTableSchema *table in _schema) {
         [table addMethodToClass];
     }
 }
@@ -104,10 +104,10 @@
 
 -(void)migrateOnDb:(TSSqlite *)sqliteCore from:(TSDatabaseSchema *)oldSchema{
     
-    for (TokoTableSchema *table in _schema) {
+    for (TSTableSchema *table in _schema) {
         [table migrateOnDb:sqliteCore from:[oldSchema schemaWithTableName:table.name]];
     }
-    for (TokoTableSchema *table in oldSchema.tableSchemas) {
+    for (TSTableSchema *table in oldSchema.tableSchemas) {
         if(![self schemaWithTableName:table.name]){
             NSLog(@"SQLite cannot drop table");
             abort();

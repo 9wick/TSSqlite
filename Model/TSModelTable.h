@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TSQuery.h"
+@class TSQuery;
 
 @interface TSModelTable : NSObject
 

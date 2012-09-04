@@ -7,7 +7,7 @@
 //
 
 #import "TSModel.h"
-#import "TokoSqlite.h"
+#import "TSSqlite.h"
 
 @interface TSModel()
 -(void)updateSave;
@@ -23,7 +23,7 @@
     if((self = [super init])){
         _data = [[NSMutableDictionary alloc] init];
         _originalData = [[NSMutableDictionary alloc] init];
-        _sqliteCore = [[TSSqlite sharedSqliteCore] retain];
+        _sqliteCore = [[TSSqlite sharedSqlite] retain];
         _schema = [[[_sqliteCore schema] schemaWithClassName:NSStringFromClass([self class])] retain];
     }
     return self;
@@ -32,10 +32,10 @@
 
 
 -(void)dealloc{
-    TokoRelease(_data);
-    TokoRelease(_sqliteCore);
-    TokoRelease(_schema);
-    TokoRelease(_originalData);
+    TSRelease(_data);
+    TSRelease(_sqliteCore);
+    TSRelease(_schema);
+    TSRelease(_originalData);
     
     [super dealloc];
 }
@@ -142,7 +142,7 @@
     [sql appendFormat:@" where %@ limit 1",[self whereString]];
     NSDictionary *data = [[_sqliteCore executeWithSql:sql] lastObject];
     
-    TokoRelease(_originalData);
+    TSRelease(_originalData);
     _originalData = [data mutableCopy];
     [_data removeAllObjects];
     

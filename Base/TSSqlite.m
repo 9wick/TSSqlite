@@ -7,7 +7,6 @@
 //
 
 #import "TSSqlite.h"
-#import "TokoSqlite.h"
 #include <sys/xattr.h>
 
 
@@ -101,8 +100,8 @@ TSSqlite *__sharedSqlite = nil;
     
     //データベースファイルを閉じる
     sqlite3_close(_database);
-    TokoRelease(_schema);
-    TokoRelease(_settingData);
+    TSRelease(_schema);
+    TSRelease(_settingData);
     [super dealloc];
 }
 
@@ -198,23 +197,23 @@ TSSqlite *__sharedSqlite = nil;
                 
                 for(int i = 0;i < colmunNum; i++){
                     NSString *name = [[NSString alloc] initWithCString:sqlite3_column_name(statement, i) encoding:NSUTF8StringEncoding];
-                    if([row isKindOfClass:[TokoModel class]]){
+                    if([row isKindOfClass:[TSModel class]]){
                         id value = nil;
-                        TokoColmunType type = [[[(TSModel *)row schema] schemaWithColumnName:name] type];
+                        TSColmunType type = [[[(TSModel *)row schema] schemaWithColumnName:name] type];
                         
                         
-                        if(TokoColmunTypeBlob == type){
+                        if(TSColmunTypeBlob == type){
                             value = [NSData dataWithBytes:sqlite3_column_blob(statement, i) length:sqlite3_column_bytes(statement, i)];
                         }else{
                             int sqliteType = sqlite3_column_type(statement, i);
                             
                             if(SQLITE_NULL != sqliteType){
                                 NSString *str = [[[NSString alloc] initWithCString:(char *)sqlite3_column_text(statement, i) encoding:NSUTF8StringEncoding] autorelease];
-                                if(TokoColmunTypeInteger == type){
+                                if(TSColmunTypeInteger == type){
                                     value = [NSNumber numberWithInt:[str intValue]];
-                                }else if(TokoColmunTypeReal == type){
+                                }else if(TSColmunTypeReal == type){
                                     value = [NSNumber numberWithDouble:[str doubleValue]];
-                                }else if(TokoColmunTypeText == type){
+                                }else if(TSColmunTypeText == type){
                                     value = str;
                                 }
                             }

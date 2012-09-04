@@ -7,7 +7,7 @@
 //
 
 #import "TSColumnSchema.h"
-#import "TokoSqlite.h"
+#import "TSSqlite.h"
 
 @interface TSColumnSchema ()
 +(TSColmunType)colmunTypeFromString:(NSString *)string;
@@ -73,8 +73,8 @@
 }
 
 -(void)dealloc{
-    TokoRelease(_name);
-    TokoRelease(_defaultValue);
+    TSRelease(_name);
+    TSRelease(_defaultValue);
     [super dealloc];
 }
 

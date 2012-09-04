@@ -7,7 +7,7 @@
 //
 
 #import "TSFetchResultsSectionController.h"
-#import "TokoSqlite.h"
+#import "TSSqlite.h"
 
 @implementation TSFetchResultsSectionController
 @synthesize sectionName = _sectionName;
@@ -23,10 +23,10 @@
 }
 
 -(void)dealloc{
-    TokoRelease(_sectionKey);
-    TokoRelease(_query);
-    TokoRelease(_cachedData);
-    TokoRelease(_sectionName);
+    TSRelease(_sectionKey);
+    TSRelease(_query);
+    TSRelease(_cachedData);
+    TSRelease(_sectionName);
     [super dealloc];
 }
 -(int)count{

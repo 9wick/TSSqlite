@@ -44,3 +44,19 @@
 
 -(BOOL)isExistTable:(NSString *)tableName;
 @end
+
+
+
+
+//一括import用
+#import "TSColumnSchema.h"
+#import "TSDatabaseSchema.h"
+#import "TSTableSchema.h"
+#import "TSModel.h"
+#import "TSModelTable.h"
+#import "TSQuery.h"
+#import "TSFetchResultsController.h"
+#import "TSFetchResultsSectionController.h"
+
+
+#define TSRelease(obj)  [obj release],obj=nil

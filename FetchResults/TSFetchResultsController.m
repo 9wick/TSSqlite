@@ -7,7 +7,7 @@
 //
 
 #import "TSFetchResultsController.h"
-#import "TokoSqlite.h"
+#import "TSSqlite.h"
 
 @implementation TSFetchResultsController
 
@@ -23,10 +23,10 @@
 }
 
 -(void)dealloc{
-    TokoRelease(_sections);
-    TokoRelease(_sectionKey);
-    TokoRelease(_sectionNameKey);
-    TokoRelease(_query);
+    TSRelease(_sections);
+    TSRelease(_sectionKey);
+    TSRelease(_sectionNameKey);
+    TSRelease(_query);
     [super dealloc];
 }
 
@@ -45,7 +45,7 @@
     for (NSDictionary *dic in sectionData) {
         TSQuery *query = [_query copy];
         [query addWhereWithKey:_sectionKey value:[dic objectForKey:_sectionKey]];
-        TokoFetchResultsSectionController *sectionController = [[TokoFetchResultsSectionController alloc] initWithQuery:query];
+        TSFetchResultsSectionController *sectionController = [[TSFetchResultsSectionController alloc] initWithQuery:query];
         sectionController.sectionName = [dic objectForKey:_sectionNameKey];
         sectionController.sectionKey = [dic objectForKey:_sectionKey];
         [_sections addObject:sectionController];
@@ -61,7 +61,7 @@
 }
 
 
--(TokoFetchResultsSectionController *)sectionAtIndex:(int)index{
+-(TSFetchResultsSectionController *)sectionAtIndex:(int)index{
    return [_sections objectAtIndex:index];
 }
 
@@ -74,7 +74,7 @@
 }
 
 -(void)removeAllObjects{
-    for (TokoFetchResultsSectionController *section in _sections) {
+    for (TSFetchResultsSectionController *section in _sections) {
         [section removeAllObjects];
     }    
 }
@@ -95,13 +95,13 @@
 }
 
 
--(int)sectionIndexForSection:(TokoFetchResultsSectionController *)section{
+-(int)sectionIndexForSection:(TSFetchResultsSectionController *)section{
     return [_sections indexOfObject:section];   
 }
 
  
--(TokoFetchResultsSectionController *)sectionForKey:(id)key{
-    for (TokoFetchResultsSectionController *section in _sections) {
+-(TSFetchResultsSectionController *)sectionForKey:(id)key{
+    for (TSFetchResultsSectionController *section in _sections) {
         if([section.sectionKey isEqual:key ]){
             return section;
         }
