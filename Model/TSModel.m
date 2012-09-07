@@ -129,6 +129,9 @@
 }
 
 -(void)delete{
+    if([_originalData count] == 0){
+        return;
+    }
     NSMutableString *sql = [[NSMutableString alloc] init];
     
     [sql appendFormat:@"delete from %@ ",_schema.name];
