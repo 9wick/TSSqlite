@@ -148,7 +148,7 @@ TSSqlite *__sharedSqlite = nil;
 
 -(NSArray *)executeWithSql:(NSString *)sql forClass:(Class)class bind:(NSArray *)bind{ 
     
-//    NSLog(@"SQL : %@",sql);
+    NSLog(@"SQL : %@",sql);
     NSMutableArray *allData = [[[NSMutableArray alloc] init] autorelease]; 
     //ロック
     @synchronized(self) {
@@ -307,7 +307,7 @@ TSSqlite *__sharedSqlite = nil;
     return [[self fetchOneWithSql:versionSql] intValue];
 }
 
--(BOOL)needMigrate{
+-(BOOL)isNeedMigrate{
     int version = [self version];
     int schemaVersion = [[_settingData objectForKey:@"schema"] count];
     

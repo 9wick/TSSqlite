@@ -25,7 +25,7 @@
 - (BOOL)addSkipBackupAttributeToItem;
 -(BOOL)open;
 -(int)version;
--(BOOL)needMigrate;
+-(BOOL)isNeedMigrate;
 -(void)migrate;
 -(void)migrateToVersion:(int)version;
 -(id)initWithFileName:(NSString *)fileName;
