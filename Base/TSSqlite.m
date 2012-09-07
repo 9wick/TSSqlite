@@ -148,7 +148,7 @@ TSSqlite *__sharedSqlite = nil;
 
 -(NSArray *)executeWithSql:(NSString *)sql forClass:(Class)class bind:(NSArray *)bind{ 
     
-    NSLog(@"SQL : %@",sql);
+    //NSLog(@"SQL : %@",sql);
     NSMutableArray *allData = [[[NSMutableArray alloc] init] autorelease]; 
     //ロック
     @synchronized(self) {
